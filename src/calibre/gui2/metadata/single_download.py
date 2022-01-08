@@ -125,7 +125,7 @@ class ResultsModel(QAbstractTableModel):  # {{{
     def __init__(self, results, parent=None):
         QAbstractTableModel.__init__(self, parent)
         self.results = results
-        self.yes_icon = (QIcon(I('ok.png')))
+        self.yes_icon = (QIcon.ic('ok.png'))
 
     def rowCount(self, parent=None):
         return len(self.results)
@@ -624,7 +624,7 @@ class CoversModel(QAbstractListModel):  # {{{
             current_cover = QPixmap(I('default_cover.png'))
         current_cover.setDevicePixelRatio(QApplication.instance().devicePixelRatio())
 
-        self.blank = QIcon(I('blank.png')).pixmap(*CoverDelegate.ICON_SIZE)
+        self.blank = QIcon.ic('blank.png').pixmap(*CoverDelegate.ICON_SIZE)
         self.cc = current_cover
         self.reset_covers(do_reset=False)
 
@@ -819,8 +819,8 @@ class CoversView(QListView):  # {{{
         idx = self.currentIndex()
         if idx and idx.isValid() and not idx.data(Qt.ItemDataRole.UserRole):
             m = QMenu(self)
-            m.addAction(QIcon(I('view.png')), _('View this cover at full size'), self.show_cover)
-            m.addAction(QIcon(I('edit-copy.png')), _('Copy this cover to clipboard'), self.copy_cover)
+            m.addAction(QIcon.ic('view.png'), _('View this cover at full size'), self.show_cover)
+            m.addAction(QIcon.ic('edit-copy.png'), _('Copy this cover to clipboard'), self.copy_cover)
             m.exec(QCursor.pos())
 
     def show_cover(self):
@@ -979,12 +979,12 @@ class LogViewer(QDialog):  # {{{
         self.copy_button = self.bb.addButton(_('Copy to clipboard'),
                 QDialogButtonBox.ButtonRole.ActionRole)
         self.copy_button.clicked.connect(self.copy_to_clipboard)
-        self.copy_button.setIcon(QIcon(I('edit-copy.png')))
+        self.copy_button.setIcon(QIcon.ic('edit-copy.png'))
         self.bb.rejected.connect(self.reject)
         self.bb.accepted.connect(self.accept)
 
         self.setWindowTitle(_('Download log'))
-        self.setWindowIcon(QIcon(I('debug.png')))
+        self.setWindowIcon(QIcon.ic('debug.png'))
         self.resize(QSize(800, 400))
 
         self.keep_updating = True
@@ -1021,7 +1021,7 @@ class FullFetch(QDialog):  # {{{
         self.book = self.cover_pixmap = None
 
         self.setWindowTitle(_('Downloading metadata...'))
-        self.setWindowIcon(QIcon(I('download-metadata.png')))
+        self.setWindowIcon(QIcon.ic('download-metadata.png'))
 
         self.stack = QStackedWidget()
         self.l = l = QVBoxLayout()
@@ -1036,12 +1036,12 @@ class FullFetch(QDialog):  # {{{
         self.ok_button = self.bb.button(QDialogButtonBox.StandardButton.Ok)
         self.ok_button.setEnabled(False)
         self.ok_button.clicked.connect(self.ok_clicked)
-        self.prev_button = pb = QPushButton(QIcon(I('back.png')), _('&Back'), self)
+        self.prev_button = pb = QPushButton(QIcon.ic('back.png'), _('&Back'), self)
         pb.clicked.connect(self.back_clicked)
         pb.setSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         self.log_button = self.bb.addButton(_('&View log'), QDialogButtonBox.ButtonRole.ActionRole)
         self.log_button.clicked.connect(self.view_log)
-        self.log_button.setIcon(QIcon(I('debug.png')))
+        self.log_button.setIcon(QIcon.ic('debug.png'))
         self.prev_button.setVisible(False)
         h.addWidget(self.prev_button), h.addWidget(self.bb)
 
@@ -1138,7 +1138,7 @@ class CoverFetch(QDialog):  # {{{
         self.cover_pixmap = None
 
         self.setWindowTitle(_('Downloading cover...'))
-        self.setWindowIcon(QIcon(I('default_cover.png')))
+        self.setWindowIcon(QIcon.ic('default_cover.png'))
 
         self.l = l = QVBoxLayout()
         self.setLayout(l)
@@ -1155,7 +1155,7 @@ class CoverFetch(QDialog):  # {{{
         l.addWidget(self.bb)
         self.log_button = self.bb.addButton(_('&View log'), QDialogButtonBox.ButtonRole.ActionRole)
         self.log_button.clicked.connect(self.view_log)
-        self.log_button.setIcon(QIcon(I('debug.png')))
+        self.log_button.setIcon(QIcon.ic('debug.png'))
         self.bb.rejected.connect(self.reject)
         self.bb.accepted.connect(self.accept)
 
